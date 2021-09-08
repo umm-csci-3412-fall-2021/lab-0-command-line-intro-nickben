@@ -1,8 +1,8 @@
 #!/bin/bash
 
-StartLoc="$(realpath "$1")" #stores where we started at
+StartLoc="$(pwd)" #stores where we started at
 TempName=$(mktemp -d) #Stores the name of the temporary directory by piping to mktemp
-tar -C "$TempName" -zxf "$StartLoc" #unzips, extracts, and then specifies where
+tar -C "$TempName" -zxf "$StartLoc"/"$1" #unzips, extracts, and then specifies where
 #cd "$TempName" || exit
 cleaned_name="cleaned_$1"
 grep -Lr "DELETE ME!" "$TempName" | xargs tar -cf "$cleaned_name"
