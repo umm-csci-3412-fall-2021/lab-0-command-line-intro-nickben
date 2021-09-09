@@ -7,7 +7,7 @@ tar -zxf "$1" -C "$TempName" #unzips, extracts, and then specifies where
 cleaned_name="cleaned_$1"
 #grep -Lr "DELETE ME!" | xargs basename -a | xargs tar -zhcf "$StartLoc/$cleaned_name" #Find everything not flagged to be deleted, and archive it
 grep -lr "DELETE ME!" "$TempName" | xargs rm
-tar -C "$TempName" -zhcf "$StartLoc/$cleaned_name" "."
+tar -C "$TempName" -zhcf "$StartLoc/$cleaned_name" "$(basename "$1" .tgz)"
 
 #mv "$StartLoc" "$cleaned_name" #Move the archive back to where it belongs
 cd "$StartLoc" || exit #go back to where we started, for simplicity
